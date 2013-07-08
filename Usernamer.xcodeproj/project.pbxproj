@@ -24,6 +24,7 @@
 		A231092B177A2B1500779A9D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2310903177A2B1400779A9D /* Foundation.framework */; };
 		A2310933177A2B1500779A9D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A2310931177A2B1500779A9D /* InfoPlist.strings */; };
 		A2310936177A2B1500779A9D /* UsernamerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A2310935177A2B1500779A9D /* UsernamerTests.m */; };
+		A2CF40F217836F5B0051C8EB /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2CF40F117836F5B0051C8EB /* Configuration.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		A2310932177A2B1500779A9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A2310934177A2B1500779A9D /* UsernamerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsernamerTests.h; sourceTree = "<group>"; };
 		A2310935177A2B1500779A9D /* UsernamerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsernamerTests.m; sourceTree = "<group>"; };
+		A2CF40F117836F5B0051C8EB /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				A2310909177A2B1400779A9D /* Usernamer-Info.plist */,
+				A2CF40F117836F5B0051C8EB /* Configuration.plist */,
 				A231090A177A2B1400779A9D /* InfoPlist.strings */,
 				A231090D177A2B1400779A9D /* main.m */,
 				A231090F177A2B1400779A9D /* Usernamer-Prefix.pch */,
@@ -241,6 +244,7 @@
 				A2310918177A2B1500779A9D /* Default-568h@2x.png in Resources */,
 				A231091B177A2B1500779A9D /* MainStoryboard_iPhone.storyboard in Resources */,
 				A231091E177A2B1500779A9D /* MainStoryboard_iPad.storyboard in Resources */,
+				A2CF40F217836F5B0051C8EB /* Configuration.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +472,7 @@
 				A231093B177A2B1500779A9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A231093C177A2B1500779A9D /* Build configuration list for PBXNativeTarget "UsernamerTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +481,7 @@
 				A231093E177A2B1500779A9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

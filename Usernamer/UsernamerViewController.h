@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UsernamerViewController : UIViewController
+@interface UsernamerViewController : UIViewController <UITextFieldDelegate, NSURLConnectionDataDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+@property (copy, nonatomic) NSString *username;
+- (IBAction)submitUser:(id)sender;
 
 @end
