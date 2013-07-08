@@ -64,15 +64,14 @@
 /**
  * Handle successful HTTP responses.
  */
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // TODO: Change based on server response. Could either have the server
-    // respond with an appropriate message and just insert it here, or maybe
-    // have different cases for status codes and have the client determine the
-    // message.
-    // I'm leaning towards just sending messages from the server. It's less
-    // duplication and provides the ability to change business logic in the 
-    // future without altering the client.
-    self.resultLabel.text = @"Great success!";
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
+    // TODO: Get the success/failure messages from the server? At least failure
+    // probably.
+    if([response statusCode] >= 100 && [response statusCode] < 400) {
+        self.resultLabel.text = @"Great success!";
+    } else {
+        self.resultLabel.text = @"Epic fail!";
+    }
 }
 
 /**
