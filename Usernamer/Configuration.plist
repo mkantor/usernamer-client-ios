@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Server URL</key>
-	<string>http://192.168.255.1:9000</string>
+	<key>API Endpoint</key>
+	<string>http://192.168.255.1:9000/users</string>
 </dict>
 </plist>

@@ -36,7 +36,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"];
     NSDictionary *configuration = [[NSDictionary alloc] initWithContentsOfFile:path];
 
-    NSURL *url = [NSURL URLWithString:[configuration objectForKey:@"Server URL"]];
+    NSURL *url = [NSURL URLWithString:[configuration objectForKey:@"API Endpoint"]];
 
     // TODO? Maybe move some of this to a helper function?
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
