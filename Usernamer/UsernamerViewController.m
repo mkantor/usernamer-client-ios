@@ -122,6 +122,14 @@
         message = @"Unknown result";
     }
 
+    // Do some additional UI stuff for certain success/failure cases.
+    if(self.httpResponseStatus >= 200 && self.httpResponseStatus < 300) {
+        [self.submitButton setEnabled:NO];
+    } else if(self.httpResponseStatus == 409) { // Conflict.
+        [self.usernameField selectAll:self];
+        // TODO? It'd be nice to hide the copy/cut popup.
+    }
+
     self.resultLabel.text = message;
 
     [self resetResponseData];

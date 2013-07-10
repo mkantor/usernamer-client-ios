@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property (copy, nonatomic) NSString *username;
 @property (assign, nonatomic) NSInteger httpResponseStatus;
 @property (copy, nonatomic) NSString *httpResponseContentType;

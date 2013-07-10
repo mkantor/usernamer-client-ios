@@ -61,6 +61,7 @@
                     </view>
                     <connections>
                         <outlet property="resultLabel" destination="6zQ-R6-q9W" id="iXD-Cl-8Pl"/>
+                        <outlet property="submitButton" destination="lA8-4s-f1l" id="HnC-cf-xip"/>
                         <outlet property="usernameField" destination="zxa-0y-fsD" id="cQI-0Z-sXK"/>
                     </connections>
                 </viewController>

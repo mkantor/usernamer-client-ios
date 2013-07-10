@@ -61,6 +61,7 @@
                     </view>
                     <connections>
                         <outlet property="resultLabel" destination="6zQ-R6-q9W" id="8s1-u8-cJf"/>
+                        <outlet property="submitButton" destination="lA8-4s-f1l" id="1No-oS-Md0"/>
                         <outlet property="usernameField" destination="zxa-0y-fsD" id="4zf-sk-3Ct"/>
                     </connections>
                 </viewController>
@@ -77,6 +78,7 @@
             <relationships>
                 <relationship kind="action" name="submitUser:"/>
                 <relationship kind="outlet" name="resultLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="submitButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
             </relationships>
         </class>
