@@ -45,8 +45,11 @@
     // Ask for a plaintext response.
     [request setValue:@"text/plain" forHTTPHeaderField:@"Accept"];
 
-    // TODO: Also send deviceType and deviceId (or use UA string or somesuch).
-    NSString *formData = [NSString stringWithFormat:@"username=%@", self.username];
+    // Add the username, deviceId, and deviceType.
+    UIDevice *device = [UIDevice currentDevice];
+    NSString *deviceId = [device.identifierForVendor UUIDString];
+    NSString *deviceType = [NSString stringWithFormat:@"%@ %@", device.systemName, device.systemVersion];
+    NSString *formData = [NSString stringWithFormat:@"username=%@&deviceId=%@&deviceType=%@", self.username, deviceId, deviceType];
     [request setHTTPBody:[formData dataUsingEncoding:NSUTF8StringEncoding]];
 
     [NSURLConnection connectionWithRequest:request delegate:self];
