@@ -38,16 +38,21 @@
 
     NSURL *url = [NSURL URLWithString:[configuration objectForKey:@"API Endpoint"]];
 
-    // TODO? Maybe move some of this to a helper function?
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+
+    // Ask for a plaintext response.
+    [request setValue:@"text/plain" forHTTPHeaderField:@"Accept"];
 
     // TODO: Also send deviceType and deviceId (or use UA string or somesuch).
     NSString *formData = [NSString stringWithFormat:@"username=%@", self.username];
     [request setHTTPBody:[formData dataUsingEncoding:NSUTF8StringEncoding]];
 
     [NSURLConnection connectionWithRequest:request delegate:self];
+
+    // Initialize the property that will hold the response data.
+    self.httpResponseBody = [[NSMutableData alloc] init];
 }
 
 /**
@@ -65,13 +70,12 @@
  * Handle successful HTTP responses.
  */
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
-    // TODO: Get the success/failure messages from the server? At least failure
-    // probably.
-    if([response statusCode] >= 100 && [response statusCode] < 400) {
-        self.resultLabel.text = @"Great success!";
-    } else {
-        self.resultLabel.text = @"Epic fail!";
-    }
+    self.httpResponseStatus = [response statusCode];
+    self.httpResponseContentType = [response MIMEType];
+    
+    // Documentation says we should discard all previously received content here.
+    // https://developer.apple.com/library/mac/#documentation/Foundation/Reference/NSURLConnectionDelegate_Protocol/Reference/Reference.html
+    [self.httpResponseBody setLength:0];
 }
 
 /**
@@ -80,5 +84,52 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // TODO: Change message based on details of the error.
     self.resultLabel.text = @"Something went wrong!";
+    [self resetResponseData];
+}
+
+/**
+ * Handle incoming HTTP response data. This is called multiple times as chunks 
+ * of response come are received.
+ */
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [self.httpResponseBody appendData:data];
+}
+
+/**
+ * Response has been completely received; time to display it.
+ */
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSString *message;
+    // If httpResponseBody is not empty, use it. Otherwise come up with a
+    // message based on the httpResponseStatus.
+    if([self.httpResponseBody length] > 0 && [self.httpResponseContentType isEqualToString:@"text/plain"]) {
+        message = [[NSString alloc] initWithData:self.httpResponseBody encoding:NSUTF8StringEncoding];
+    } else if(self.httpResponseStatus != 0) {
+        // For some reason NSHTTPURLResponse wants to call 200 "no error",
+        // which sucks.
+        if(self.httpResponseStatus == 200) {
+            message = @"ok";
+        } else {
+            message = [NSHTTPURLResponse localizedStringForStatusCode:self.httpResponseStatus];
+        }
+        
+        message = [self capitalizeFirstLetter:message];
+    } else {
+        message = @"Unknown result";
+    }
+
+    self.resultLabel.text = message;
+
+    [self resetResponseData];
+}
+
+- (void)resetResponseData {
+    [self.httpResponseBody setLength:0];
+    self.httpResponseStatus = 0;
+    self.httpResponseContentType = nil;
+}
+
+- (NSString *)capitalizeFirstLetter:(NSString *)string {
+    return [string stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[string substringToIndex:1] uppercaseString]];
 }
 @end

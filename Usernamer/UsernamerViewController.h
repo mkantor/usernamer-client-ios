@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface UsernamerViewController : UIViewController <UITextFieldDelegate, NSURLConnectionDataDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (copy, nonatomic) NSString *username;
+@property (assign, nonatomic) NSInteger httpResponseStatus;
+@property (copy, nonatomic) NSString *httpResponseContentType;
+@property (strong, nonatomic) NSMutableData *httpResponseBody;
 - (IBAction)submitUser:(id)sender;
 
 @end
