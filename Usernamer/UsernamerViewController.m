@@ -82,8 +82,7 @@
  * Handle unsuccessful HTTP responses.
  */
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // TODO: Change message based on details of the error.
-    self.resultLabel.text = @"Something went wrong!";
+    self.resultLabel.text = error.localizedDescription;
     [self resetResponseData];
 }
 
