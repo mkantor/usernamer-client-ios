@@ -72,7 +72,7 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
     self.httpResponseStatus = [response statusCode];
     self.httpResponseContentType = [response MIMEType];
-    
+
     // Documentation says we should discard all previously received content here.
     // https://developer.apple.com/library/mac/#documentation/Foundation/Reference/NSURLConnectionDelegate_Protocol/Reference/Reference.html
     [self.httpResponseBody setLength:0];
@@ -104,6 +104,8 @@
     // message based on the httpResponseStatus.
     if([self.httpResponseBody length] > 0 && [self.httpResponseContentType isEqualToString:@"text/plain"]) {
         message = [[NSString alloc] initWithData:self.httpResponseBody encoding:NSUTF8StringEncoding];
+        // Just use the first line.
+        message = [[message componentsSeparatedByString: @"\n"] objectAtIndex:0];
     } else if(self.httpResponseStatus != 0) {
         // For some reason NSHTTPURLResponse wants to call 200 "no error",
         // which sucks.
@@ -112,7 +114,7 @@
         } else {
             message = [NSHTTPURLResponse localizedStringForStatusCode:self.httpResponseStatus];
         }
-        
+
         message = [self capitalizeFirstLetter:message];
     } else {
         message = @"Unknown result";
